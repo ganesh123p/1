@@ -1,0 +1,386 @@
+/* Global Styles & Apple-esque Theme */
+:root {
+    --primary-bg: #000000; /* True Black for Apple feel */
+    --secondary-bg: #1c1c1e; /* Dark Grey for elements */
+    --card-bg: #2c2c2e; /* Slightly lighter grey for cards */
+    --text-color: #f5f5f7; /* Off-white, common in Apple UI */
+    --accent-color: #ffd60a; /* Vibrant Yellow (Solar) */
+    --secondary-accent-color: #ffae00; /* Deeper yellow for hover */
+    --border-color: #38383a;
+    --border-radius-large: 18px; /* More pronounced Apple rounding */
+    --border-radius-medium: 12px;
+    --border-radius-small: 8px;
+    --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    --box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    --focus-ring-color: rgba(255, 214, 10, 0.6); /* Yellow focus ring */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px; /* Base font size */
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--primary-bg);
+    color: var(--text-color);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- Splash Screen --- */
+#splash-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--primary-bg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    color: var(--accent-color);
+}
+.splash-logo-container {
+    /* For potential complex animations if logo was SVG */
+}
+.splash-logo {
+    font-size: 6rem; /* Large logo */
+    font-weight: 600;
+    width: 120px;
+    height: 120px;
+    border: 5px solid var(--accent-color);
+    border-radius: 28px; /* Apple's squircle-like radius */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    box-shadow: 0 0 30px var(--accent-color);
+}
+.splash-text {
+    font-size: 1.5rem;
+    opacity: 0.8;
+}
+
+/* --- Guided Tour Modal --- */
+.tour-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85); /* Darker backdrop */
+    display: flex; /* Managed by JS initially */
+    justify-content: center;
+    align-items: center;
+    z-index: 9990;
+    padding: 15px;
+}
+.tour-content {
+    background-color: var(--card-bg);
+    padding: 25px 30px;
+    border-radius: var(--border-radius-large);
+    width: 90%;
+    max-width: 500px;
+    box-shadow: var(--box-shadow);
+    text-align: center;
+}
+.tour-title {
+    color: var(--accent-color);
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.8rem;
+}
+.tour-step p {
+    margin-bottom: 20px;
+    font-size: 1.05em;
+    color: #c7c7cc; /* Lighter grey text for readability */
+}
+.tour-img-placeholder {
+    width: 100%;
+    max-width: 300px;
+    height: 150px;
+    background-color: var(--secondary-bg);
+    border: 1px dashed var(--border-color);
+    border-radius: var(--border-radius-medium);
+    margin: 15px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #8e8e93;
+}
+.tour-button {
+    background-color: var(--accent-color);
+    color: var(--primary-bg); /* Black text on yellow button */
+    border: none;
+    padding: 12px 25px;
+    border-radius: var(--border-radius-small);
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1em;
+    margin: 8px 5px;
+    transition: background-color 0.2s ease-in-out; /* Base for Framer to build on */
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+/* Focus state for accessibility */
+.tour-button:focus-visible, .action-button:focus-visible, textarea:focus-visible, select:focus-visible {
+    outline: 3px solid var(--focus-ring-color);
+    outline-offset: 2px;
+}
+
+
+/* --- Main Application --- */
+#app-container {
+    width: 100%;
+    max-width: 750px; /* Slightly wider for better desktop use */
+    margin: 0 auto;
+    padding: 20px;
+    display: flex; /* Managed by JS */
+    flex-direction: column;
+    gap: 25px;
+}
+
+.app-header {
+    text-align: center;
+    margin-bottom: 10px;
+}
+.logo-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+.app-logo {
+    font-size: 2.8rem;
+    font-weight: bold;
+    color: var(--accent-color);
+    display: inline-block;
+    padding: 5px 10px;
+}
+.logo-icon { /* For potential subtle animation or distinct styling */
+    font-size: 0.7em;
+    vertical-align: super;
+    margin-left: -5px;
+    color: var(--text-color);
+    opacity: 0.7;
+}
+.app-header h1 {
+    color: var(--text-color);
+    font-size: 1.2rem; /* Subtitle smaller */
+    font-weight: 400;
+    opacity: 0.8;
+}
+
+.card {
+    background-color: var(--card-bg);
+    padding: 25px;
+    border-radius: var(--border-radius-large);
+    box-shadow: var(--box-shadow);
+}
+
+textarea#text-to-speak {
+    width: 100%;
+    padding: 15px;
+    border-radius: var(--border-radius-medium);
+    border: 1px solid var(--border-color);
+    background-color: var(--secondary-bg);
+    color: var(--text-color);
+    font-size: 1.1em;
+    margin-bottom: 20px;
+    resize: vertical;
+    min-height: 120px;
+}
+textarea#text-to-speak::placeholder {
+    color: #8e8e93;
+}
+
+.controls {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+.voice-selector-container {
+    display: flex;
+    align-items: center;
+    background-color: var(--secondary-bg);
+    border-radius: var(--border-radius-medium);
+    border: 1px solid var(--border-color);
+    padding-left: 12px;
+    flex-grow: 1;
+}
+.voice-selector-container i {
+    color: var(--accent-color);
+    margin-right: 8px;
+}
+select#voice-select {
+    padding: 12px 10px;
+    border-radius: 0 var(--border-radius-medium) var(--border-radius-medium) 0;
+    background-color: transparent; /* Match container */
+    color: var(--text-color);
+    border: none;
+    flex-grow: 1;
+    font-size: 0.95em;
+    appearance: none; /* For custom arrow later if desired */
+    -webkit-appearance: none;
+    cursor: pointer;
+}
+select#voice-select:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+
+.action-button {
+    background-color: var(--accent-color);
+    color: var(--primary-bg);
+    border: none;
+    padding: 12px 25px;
+    border-radius: var(--border-radius-small);
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1em;
+    transition: background-color 0.2s ease-in-out; /* Base for Framer */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-width: 150px; /* Ensure buttons have a decent width */
+}
+.action-button.secondary {
+    background-color: var(--secondary-bg);
+    color: var(--accent-color);
+    border: 1px solid var(--accent-color);
+}
+.action-button:disabled {
+    background-color: #555 !important; /* Override Framer hover if disabled */
+    color: #999 !important;
+    cursor: not-allowed;
+    border-color: #555 !important;
+}
+.action-button i {
+    font-size: 1.1em;
+}
+
+.status-message {
+    font-size: 0.95em;
+    min-height: 1.5em;
+    text-align: center;
+    margin-top: 15px;
+    padding: 5px;
+    border-radius: var(--border-radius-small);
+}
+.status-message.success { color: #34c759; background-color: rgba(52, 199, 89, 0.1); } /* Apple Green */
+.status-message.error   { color: #ff3b30; background-color: rgba(255, 59, 48, 0.1); } /* Apple Red */
+.status-message.info    { color: #007aff; background-color: rgba(0, 122, 255, 0.1); } /* Apple Blue */
+
+
+.history-section h2 {
+    color: var(--accent-color);
+    margin-top: 0;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.5rem;
+}
+ul#history-list {
+    list-style: none;
+    margin: 0 0 20px 0;
+    max-height: 250px;
+    overflow-y: auto;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-medium);
+}
+.history-empty-placeholder {
+    padding: 15px;
+    text-align: center;
+    color: #8e8e93;
+    cursor: default;
+}
+ul#history-list li:not(.history-empty-placeholder) {
+    padding: 12px 15px;
+    background-color: var(--secondary-bg);
+    border-bottom: 1px solid var(--border-color);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.2s ease;
+}
+ul#history-list li:last-child {
+    border-bottom: none;
+}
+.history-text {
+    flex-grow: 1;
+    margin-right: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.history-actions button {
+    background: none;
+    border: none;
+    color: var(--accent-color);
+    cursor: pointer;
+    font-size: 1em;
+    padding: 8px;
+    border-radius: 50%; /* Circular hover effect */
+}
+.history-actions button:hover {
+    color: var(--secondary-accent-color);
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.app-footer {
+    text-align: center;
+    padding: 25px 20px;
+    font-size: 0.9em;
+    color: #8e8e93; /* Standard Apple secondary text color */
+    margin-top: auto;
+}
+.designer-name {
+    font-weight: 600;
+    color: var(--accent-color);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 600px) {
+    html { font-size: 15px; }
+    .app-header h1 { font-size: 1.1rem; }
+    .app-logo { font-size: 2.2rem; }
+    .controls { flex-direction: column; gap: 10px; }
+    .voice-selector-container, .action-button { width: 100%; }
+    .card { padding: 20px; }
+    .tour-content { padding: 20px; }
+    .splash-logo { font-size: 5rem; width: 100px; height: 100px; border-width: 4px;}
+    .splash-text { font-size: 1.3rem; }
+}
+
+/* Custom scrollbar for history (WebKit browsers) */
+ul#history-list::-webkit-scrollbar {
+    width: 8px;
+}
+ul#history-list::-webkit-scrollbar-track {
+    background: var(--secondary-bg);
+    border-radius: var(--border-radius-medium);
+}
+ul#history-list::-webkit-scrollbar-thumb {
+    background-color: var(--accent-color);
+    border-radius: var(--border-radius-small);
+    border: 2px solid var(--secondary-bg);
+}
