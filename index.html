@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="te">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>వాణి - తెలుగు TTS (Designed by Ganesh)</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Framer Motion (UMD build for direct browser use) -->
+    <script src="https://cdn.jsdelivr.net/npm/framer-motion@10/dist/framer-motion.umd.min.js"></script>
+</head>
+<body>
+
+    <!-- Splash Screen (iPhone Boot Style) -->
+    <div id="splash-screen">
+        <div class="splash-logo-container">
+            <!-- Simple "G" logo, Apple-esque. Could be replaced by a complex SVG -->
+            <div class="splash-logo">G</div>
+        </div>
+        <p class="splash-text">వాణి by Ganesh</p>
+    </div>
+
+    <!-- Guided Intro Tour -->
+    <div id="guided-tour" class="tour-modal" style="display: none;">
+        <div class="tour-content">
+            <div id="tour-step-1" class="tour-step">
+                <h2 class="tour-title"><i class="fas fa-rocket"></i> స్వాగతం!</h2>
+                <p>ఇది 'వాణి', గణేష్ రూపొందించిన తెలుగు టెక్స్ట్-టు-స్పీచ్ అప్లికేషన్.</p>
+                <div class="tour-img-placeholder">మీ అప్లికేషన్ స్క్రీన్ షాట్ ఇక్కడ</div>
+                <button class="tour-button tour-next-btn" data-next="tour-step-2">తదుపరి <i class="fas fa-arrow-right"></i></button>
+            </div>
+            <div id="tour-step-2" class="tour-step" style="display: none;">
+                <h2 class="tour-title"><i class="fas fa-question-circle"></i> ఎలా ఉపయోగించాలి?</h2>
+                <p>టెక్స్ట్ బాక్స్‌లో తెలుగు వచనాన్ని టైప్ చేయండి లేదా అతికించండి.</p>
+                <p>"మాట్లాడండి" బటన్‌ను నొక్కండి. మీరు వివిధ తెలుగు స్వరాలను కూడా ఎంచుకోవచ్చు.</p>
+                <button class="tour-button tour-prev-btn" data-prev="tour-step-1"><i class="fas fa-arrow-left"></i> వెనుకకు</button>
+                <button class="tour-button tour-next-btn" data-next="tour-step-3">తదుపరి <i class="fas fa-arrow-right"></i></button>
+            </div>
+            <div id="tour-step-3" class="tour-step" style="display: none;">
+                <h2 class="tour-title"><i class="fas fa-cogs"></i> ఫీచర్లు</h2>
+                <p>మాట్లాడిన వచనాలు చరిత్రలో సేవ్ చేయబడతాయి. వాటిని మళ్ళీ వినడానికి లేదా తొలగించడానికి చరిత్రను చూడండి.</p>
+                <p>ఈ యాప్ సొగసైన, మొబైల్ ఫ్రెండ్లీ ఇంటర్‌ఫేస్‌ను కలిగి ఉంది.</p>
+                <button class="tour-button tour-prev-btn" data-prev="tour-step-2"><i class="fas fa-arrow-left"></i> వెనుకకు</button>
+                <button class="tour-button" id="tour-finish-btn">ప్రారంభించండి!</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Application -->
+    <div id="app-container" style="display: none;">
+        <header class="app-header">
+            <div class="logo-title">
+                <div class="app-logo">వా<span class="logo-icon"><i class="fas fa-signature"></i></span>ణి</div>
+                <h1>తెలుగు వాక్య ఉచ్చారణ</h1>
+            </div>
+        </header>
+
+        <main>
+            <section class="input-section card">
+                <textarea id="text-to-speak" placeholder="ఇక్కడ తెలుగు వచనాన్ని నమోదు చేయండి..." rows="6" aria-label="Text to speak input"></textarea>
+                <div class="controls">
+                    <div class="voice-selector-container">
+                        <i class="fas fa-user-voice"></i>
+                        <select id="voice-select" aria-label="Select voice"></select>
+                    </div>
+                    <button id="speak-button" class="action-button" aria-label="Speak text">
+                        <i class="fas fa-play"></i> <span>మాట్లాడండి</span>
+                    </button>
+                </div>
+                <div id="status-message" class="status-message" role="status" aria-live="polite"></div>
+            </section>
+
+            <section class="history-section card">
+                <h2><i class="fas fa-history"></i> చరిత్ర</h2>
+                <ul id="history-list" aria-live="polite">
+                    <!-- History items will be populated here -->
+                    <li class="history-empty-placeholder">చరిత్ర ఖాళీగా ఉంది.</li>
+                </ul>
+                <button id="clear-history-button" class="action-button secondary" aria-label="Clear history">
+                    <i class="fas fa-trash-alt"></i> చరిత్రను క్లియర్ చేయండి
+                </button>
+            </section>
+        </main>
+
+        <footer class="app-footer">
+            <p>© <span id="current-year"></span>. Designed by <span class="designer-name">Ganesh</span>. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
